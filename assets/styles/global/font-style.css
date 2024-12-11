@@ -1,0 +1,24 @@
+
+@font-face {
+    font-display: swap; 
+    font-family:  "Geist Mono", monospace;
+    font-style: normal;
+    font-weight: 300;
+    src: url('../../fonts/GeistMono-Light.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
+  @font-face {
+    font-display: swap; 
+    font-family:  "Geist Mono", monospace;
+    font-style: normal;
+    font-weight: 400;
+    src: url('../../fonts/GeistMono-Medium.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }
+
+  @font-face {
+    font-display: swap;
+    font-family:  "Geist Mono", monospace;
+    font-style: normal;
+    font-weight: 500;
+    src: url('../../fonts/GeistMono-Regular.ttf') format('ttf'); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+  }

@@ -1,0 +1,16 @@
+:root
+    {
+        --global-font:  "Geist Mono", monospace; 
+    
+        --h1: clamp(2rem, 0.9565rem + 5.2174vw, 5rem);
+        --h2: clamp(1.625rem, 1.212rem + 2.0652vw, 2.8125rem);
+        --h3: clamp(1.125rem, 0.8207rem + 1.5217vw, 2rem);
+        --h4: clamp(1rem, 1rem + 0.9999vw, 1.25rem);
+        --h5: clamp(0.875rem, 0.725rem + 0.8696vw, 1.425rem);
+        --h6: clamp(0.875rem, 0.625rem + 0.7391vw, 1.125rem);
+        --common-text: clamp(1rem, 0.9565rem + 0.2174vw, 1.25rem);
+
+
+       
+
+    }
