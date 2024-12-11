@@ -24,9 +24,7 @@ if (isset($product_id)) {
     }
 } 
 
-$conn->close();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -849,45 +847,44 @@ if (isset($_POST['product_id'])) {
         }
 
         echo '<span class="review" style="margin-left:5px">(' . $review_count . ' Reviews)</span>
-        </div>
-        <div class="product-price">
-            <span class="offer-price">PHP ' . $row["price"] . '</span>
-        </div>
-        <div class="product-details">
-            <h3>Description</h3>
-            <p>' . $row["description"] . '</p>
-        </div>
-        <div class="product-size">
-            <h4>Quantity</h4>
-                <input type="number" value="1" min="1" max="' . $row["stock_quantity"] . '" id="quantity">
-      
-        </div>
-   
-        <span class="divider"></span>
-        <div class="product-btn-group" style="flex-wrap: wrap">
-            <div class="button buy-now"><i class="bx bxs-zap"></i> Buy Now</div>
+                </div>
+                <div class="product-price">
+                    <span class="offer-price">PHP ' . $row["price"] . '</span>
+                </div>
+                <div class="product-details">
+                    <h3>Description</h3>
+                    <p>' . $row["description"] . '</p>
+                </div>
+                <div class="product-size">
+                    <h4>Quantity</h4>
+                        <input type="number" value="1" min="1" max="' . $row["stock_quantity"] . '" id="quantity">
+            
+                </div>
+        
+                <span class="divider"></span>
+                <div class="product-btn-group" style="flex-wrap: wrap">
+                    <div class="button buy-now"><i class="bx bxs-zap"></i> Buy Now</div>
 
-              <form class="productForm" id="addToCartForm" method="POST">
-    <input type="hidden" name="user_id" id="user_id" value="'. $user_id .'"> 
-    <input type="hidden" name="product_id" id="product_id" value="' . $product_id . '"> 
-    <input type="hidden" name="quantity" id="new-input-container" placeholder="Quantity" required>
-    <div class="button add-cart"><i class="bx bxs-cart"></i> Add to Cart</div>
-    </form>
+                    <form class="productForm" id="addToCartForm" method="POST">
+            <input type="hidden" name="user_id" id="user_id" value="'. $user_id .'"> 
+            <input type="hidden" name="product_id" id="product_id" value="' . $product_id . '"> 
+            <input type="hidden" name="quantity" id="new-input-container" placeholder="Quantity" required>
+            <div class="button add-cart"><i class="bx bxs-cart"></i> Add to Cart</div>
+            </form>
 
+                </div>
+            </div>
         </div>
-    </div>
-</div>
-</div>
-</div>
-</div>';
+        </div>
+        </div>
+        </div>';
 
+        $review_stmt->close();
 
     } else {
         echo "Product not found.";
     }
 
-    $stmt->close();
-    $review_stmt->close();
 } else {
     echo "No product ID provided.";
 }
@@ -929,10 +926,8 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $related_product_id = $row["product_id"];
         $imgsrc = $row["imgsrc"];
-        
-        echo '<div class="prodcard" onclick="submitForm(' . $related_product_id . ')">';
+        echo '<div class="prodcard" onclick="submitForm(' . $related_product_id . ')">'; 
         echo '<img src="../assets/img/' . $imgsrc . '"  style="height:100px;width:100px" />';
-        
         echo '<form class="productForm" method="POST" action="view_product.php" style="display: none;">';
         echo '<input type="hidden" name="product_id" value="' . $related_product_id . '" />';
         echo '</form>';
@@ -943,8 +938,6 @@ if ($result->num_rows > 0) {
 } else {
     echo "<center style='font-size:10px'>No related products found.</center>";
 }
-
-$conn->close();
 ?>
 
 <script>
@@ -953,11 +946,7 @@ function submitForm(productId) {
     form.submit();
 }
 </script>
-
 </section>
-
-
-
 <?php
 include '../db_conn.php';
 
@@ -1025,9 +1014,6 @@ $conn->close();
       <label for="rating-2"></label>
       <input type="radio" name="rating" id="rating-1">
       <label for="rating-1"></label>
-
-    
-
       <div class="emoji-wrapper">
         <div class="emoji">
           <svg class="rating-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -1181,13 +1167,8 @@ $conn->close();
     setInterval(checkRating, 100);
 
 });
-
 </script>
 </section>
-
-
-
-
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
 
@@ -1230,7 +1211,6 @@ $conn->close();
         if (xhrReviews.status === 200) {
             var data = JSON.parse(xhrReviews.responseText);
             if (data.message) {
-                console.log(data.message);
             } else {
                 data.forEach(function (review) {
                     testimonials.push({
@@ -1238,7 +1218,6 @@ $conn->close();
                         text: review.user_id
                     });
                 });
-                console.log(testimonials);
             }
         } else {
             console.log('Error fetching reviews.');
@@ -1273,16 +1252,6 @@ $conn->close();
         }
     });
 
-    var prodcards = document.querySelectorAll('.prodcard');
-    prodcards.forEach(function (prodcard) {
-        prodcard.addEventListener('click', function () {
-            var productId = this.getAttribute('data-product-id');
-            var form = this.nextElementSibling.querySelector('.productForm');
-            form.querySelector('input[name="product_id"]').value = productId;
-            form.submit();
-        });
-    });
-
     const quantityInput = document.getElementById('quantity');
     const newInputContainer = document.getElementById('new-input-container');
     newInputContainer.value = quantityInput.value;
@@ -1292,9 +1261,7 @@ $conn->close();
     });
 
 });
-
 </script>
-
 <script src="assets/js/main.js"></script>
 </body>
 </html>
